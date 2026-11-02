@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0b0d">
+<title>NZ AI STUDIO — Create beyond limits</title>
+<style>
+:root{--bg:#09090b;--panel:#121215;--panel2:#19191e;--line:#29292f;--orange:#ff7628;--orange2:#ff9a52;--text:#f5f3f1;--muted:#a3a0a0;--green:#9ee6b0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 75% -10%,#49200f55,transparent 35%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}
+button,input,textarea,select{font:inherit}button{cursor:pointer}.shell{max-width:1440px;margin:auto;padding:0 28px 48px}
+header{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff12}
+.brand{display:flex;align-items:center;gap:11px;font-weight:850;letter-spacing:.06em}.brand-mark{width:36px;height:36px;border-radius:11px;background:linear-gradient(145deg,#ff9c55,#ed5717);display:grid;place-items:center;color:#17100c;font-weight:950;font-size:18px;box-shadow:0 5px 22px #ff762833}
+.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:.22em;margin-top:2px}
+.header-right{display:flex;align-items:center;gap:10px}.status{font-size:11px;color:#c6c1bc;border:1px solid var(--line);border-radius:30px;padding:8px 12px}.status i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#f3a05d;margin-right:7px}
+.hero{padding:42px 0 28px;display:flex;justify-content:space-between;align-items:end;gap:20px}.eyebrow{color:var(--orange2);font-size:10px;font-weight:800;letter-spacing:.22em;text-transform:uppercase}.hero h1{font-size:clamp(32px,5vw,54px);letter-spacing:-.055em;line-height:1.02;margin:10px 0}.hero h1 span{color:var(--orange)}.hero p{margin:0;color:var(--muted);font-size:14px}.hero-tag{border:1px solid #ff762844;color:#ffb17f;border-radius:9px;padding:9px 12px;font-size:11px;white-space:nowrap}
+.workspace{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr);gap:18px;align-items:start}.panel{background:linear-gradient(180deg,#151518,#101013);border:1px solid var(--line);border-radius:17px;overflow:hidden}.panel-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.panel-head h2{font-size:14px;margin:0;letter-spacing:.01em}.step{font-size:10px;color:var(--muted);letter-spacing:.12em}.panel-body{padding:20px}
+.field-label{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:750;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}.hint{font-size:10px;color:var(--muted);font-weight:500;letter-spacing:0;text-transform:none}
+textarea{width:100%;min-height:125px;resize:vertical;background:#0b0b0e;border:1px solid #303037;border-radius:11px;color:var(--text);padding:14px;outline:none;line-height:1.55;font-size:13px}textarea:focus,input:focus,select:focus{border-color:var(--orange);box-shadow:0 0 0 3px #ff76281c}
+textarea::placeholder,input::placeholder{color:#77747a}.prompt-tools{display:flex;justify-content:space-between;align-items:center;margin-top:8px;gap:8px}.tiny-btn{border:0;background:transparent;color:#ffad7c;font-size:11px;padding:5px 0}.counter{font-size:10px;color:#777}
+.presets{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 22px}.chip{border:1px solid #35353b;background:#17171b;color:#c9c5c2;border-radius:30px;padding:7px 11px;font-size:10px;transition:.2s}.chip:hover,.chip.active{border-color:#ff7628;color:#ffad7c;background:#ff762814}
+.upload{border:1px dashed #45434a;border-radius:12px;background:#0d0d10;min-height:112px;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;position:relative;transition:.2s}.upload.drag{border-color:var(--orange);background:#ff762810}.upload input{position:absolute;inset:0;opacity:0;width:100%;cursor:pointer}.upload-icon{width:34px;height:34px;border-radius:10px;background:#ff76281c;color:var(--orange);display:grid;place-items:center;margin:0 auto 8px;font-size:18px}.upload strong{font-size:12px}.upload p{font-size:10px;color:var(--muted);margin:5px 0 0}.file-name{color:var(--orange2);font-size:10px;margin-top:7px;overflow-wrap:anywhere}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}.option label{display:block;color:#c8c4c1;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px}.option select,.option input{width:100%;background:#0b0b0e;border:1px solid #303037;border-radius:9px;padding:11px;color:var(--text);outline:none;font-size:12px}
+.mode-row{display:flex;gap:7px}.mode-btn{flex:1;border:1px solid #34343a;border-radius:9px;background:#0c0c0f;color:#bcb8b6;padding:10px 7px;font-size:11px}.mode-btn.active{border-color:var(--orange);color:#ffad7c;background:#ff762814}
+.generate{margin-top:21px;width:100%;border:0;border-radius:11px;padding:14px 18px;background:linear-gradient(100deg,#ff8a3d,#f15b1d);color:#1c1009;font-size:13px;font-weight:850;letter-spacing:.02em;box-shadow:0 8px 24px #f15b1d2a;transition:transform .2s,filter .2s}.generate:hover{transform:translateY(-1px);filter:brightness(1.08)}.generate:disabled{opacity:.6;cursor:wait;transform:none}.notice{font-size:10px;color:#89858a;line-height:1.5;margin:10px 2px 0}
+.preview-wrap{padding:16px}.preview{min-height:410px;aspect-ratio:4/3;border:1px solid #2e2d33;border-radius:12px;background:radial-gradient(circle at 50% 42%,#29201c 0,#171519 34%,#0c0c0f 75%);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}.preview img{width:100%;height:100%;object-fit:contain;display:none}.empty{text-align:center;padding:25px;max-width:290px}.empty .spark{font-size:35px;color:var(--orange);margin-bottom:13px}.empty h3{font-size:15px;margin:0 0 7px}.empty p{font-size:11px;line-height:1.6;color:var(--muted);margin:0}.preview-label{position:absolute;top:12px;left:12px;border:1px solid #ffffff1c;background:#09090bcc;border-radius:7px;padding:6px 9px;font-size:9px;letter-spacing:.1em;color:#d7d1cd}
+.preview-actions{display:flex;gap:8px;padding:0 16px 16px}.secondary{flex:1;border:1px solid #38383e;background:#19191e;color:#e5e0dc;border-radius:9px;padding:10px;font-size:11px}.secondary:disabled{opacity:.4;cursor:not-allowed}.secondary.primary{border-color:#ff762866;color:#ffad7c}
+.message{margin:0 16px 16px;border-radius:9px;padding:10px 12px;font-size:11px;line-height:1.5;display:none}.message.error{display:block;color:#ffb2a5;background:#431b19;border:1px solid #7b3029}.message.info{display:block;color:#ffca9f;background:#392313;border:1px solid #6b3c20}.message.success{display:block;color:#b7efc4;background:#14291b;border:1px solid #285638}
+.bottom{display:flex;justify-content:space-between;gap:15px;padding:20px 2px;color:#77737a;font-size:10px}.bottom strong{color:#b4afb0;font-weight:650}
+@media(max-width:850px){.workspace{grid-template-columns:1fr}.hero{align-items:start;flex-direction:column}.preview{min-height:320px}.shell{padding:0 16px 30px}}
+@media(max-width:420px){.options{grid-template-columns:1fr}.header-right .status{display:none}.panel-body{padding:15px}.panel-head{padding:15px}.preview{min-height:270px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+  <div class="brand"><div class="brand-mark">NZ</div><div>NZ AI STUDIO<small>CREATE BEYOND LIMITS</small></div></div>
+  <div class="header-right"><div class="status"><i></i> CREATIVE WORKSPACE</div></div>
+</header>
+<section class="hero">
+  <div><div class="eyebrow">AI IMAGE WORKSPACE / 01</div><h1>Make your ideas<br><span>look incredible.</span></h1><p>Generate a new visual or transform a photo with your own creative direction.</p></div>
+  <div class="hero-tag">✦ &nbsp; YOUR CREATIVE SPACE</div>
+</section>
+<main class="workspace">
+<section class="panel">
+  <div class="panel-head"><h2>Build your image</h2><span class="step">01 — INPUT</span></div>
+  <div class="panel-body">
+    <div class="field-label"><span>Your prompt</span><span class="hint">Describe the image you imagine</span></div>
+    <textarea id="prompt" maxlength="1200" placeholder="A cinematic portrait in a moody city at golden hour, soft background bokeh, natural details..."></textarea>
+    <div class="prompt-tools"><button class="tiny-btn" id="clearPrompt">↺ Clear prompt</button><span class="counter"><span id="count">0</span>/1200</span></div>
+    <div class="field-label" style="margin-top:20px"><span>Quick styles</span><span class="hint">Tap to add a direction</span></div>
+    <div class="presets" id="presets">
+      <button class="chip" data-prompt="Cinematic portrait, dramatic soft lighting, rich shadows, subtle film grain, realistic skin texture, premium editorial photography.">Cinematic</button>
+      <button class="chip" data-prompt="Timeless old-money editorial portrait, tailored dark outfit, elegant heritage architecture, warm natural light, refined composition.">Old money</button>
+      <button class="chip" data-prompt="Moody black-and-white fine-art portrait, low-key studio lighting, deep charcoal background, authentic details, elegant contrast.">B&W aesthetic</button>
+      <button class="chip" data-prompt="Dreamlike fantasy scene, atmospheric light, beautiful depth, imaginative details, polished digital art.">Fantasy</button>
+      <button class="chip" data-prompt="Clean professional studio headshot, soft even lighting, neutral background, natural expression, realistic photography.">Studio</button>
+      <button class="chip" data-prompt="Vibrant anime-inspired illustration, expressive composition, crisp linework, rich colors, detailed background.">Anime</button>
+    </div>
+    <div class="field-label"><span>Reference photo</span><span class="hint">Optional · JPG, PNG, WEBP</span></div>
+    <div class="upload" id="dropZone">
+      <input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp">
+      <div><div class="upload-icon">↑</div><strong>Drop a photo here or browse</strong><p>Choose an image to use as your editing reference</p><div class="file-name" id="fileName"></div></div>
+    </div>
+    <div class="options">
+      <div class="option"><label>Creation mode</label><div class="mode-row"><button class="mode-btn active" data-mode="generate">Generate</button><button class="mode-btn" data-mode="edit">Edit photo</button></div></div>
+      <div class="option"><label for="ratio">Aspect ratio</label><select id="ratio"><option value="1:1">Square · 1:1</option><option value="4:5">Portrait · 4:5</option><option value="3:2">Landscape · 3:2</option><option value="16:9">Widescreen · 16:9</option><option value="9:16">Story · 9:16</option></select></div>
+      <div class="option"><label for="quality">Output quality</label><select id="quality"><option value="standard">Standard</option><option value="high">High</option></select></div>
+      <div class="option"><label for="style">Style strength</label><select id="style"><option value="balanced">Balanced</option><option value="subtle">Subtle</option><option value="strong">Strong</option></select></div>
+    </div>
+    <button class="generate" id="generateBtn">✦ &nbsp; Generate image</button>
+    <p class="notice">Your image request is sent to your own secure generation backend. Connect an image-generation API to enable real AI output. Never place a private API key in this HTML file.</p>
+  </div>
+</section>
+<section class="panel">
+  <div class="panel-head"><h2>Studio preview</h2><span class="step">02 — RESULT</span></div>
+  <div class="preview-wrap">
+    <div class="preview" id="preview">
+      <span class="preview-label">LIVE PREVIEW</span>
+      <div class="empty" id="empty"><div class="spark">✧</div><h3>Your next creation starts here</h3><p>Write a prompt, choose a style and generate. Your finished image will appear in this space.</p></div>
+      <img id="resultImage" alt="Generated image preview">
+    </div>
+  </div>
+  <div class="preview-actions">
+    <button class="secondary" id="resetBtn">↺ Reset workspace</button>
+    <button class="secondary primary" id="downloadBtn" disabled>↓ Download image</button>
+  </div>
+  <div class="message" id="message" role="status"></div>
+</section>
+</main>
+<footer class="bottom"><span><strong>NZ AI STUDIO</strong> &nbsp;·&nbsp; Creative tools for everyone</span><span>DESIGNED IN ORANGE & BLACK</span></footer>
+</div>
+<script>
+(() => {
+ const $ = id => document.getElementById(id);
+ const prompt = $('prompt'), fileInput = $('fileInput'), resultImage = $('resultImage');
+ let selectedFile = null, mode = 'generate', resultUrl = null;
+ const setMessage = (text, type='info') => { const el=$('message'); el.textContent=text; el.className='message '+type; };
+ const clearMessage = () => { $('message').className='message'; $('message').textContent=''; };
+ const showImage = url => { resultImage.src=url; resultImage.style.display='block'; $('empty').style.display='none'; $('downloadBtn').disabled=false; };
+ const resetResult = () => { if(resultUrl && resultUrl.startsWith('blob:')) URL.revokeObjectURL(resultUrl); resultUrl=null; resultImage.removeAttribute('src'); resultImage.style.display='none'; $('empty').style.display='block'; $('downloadBtn').disabled=true; };
+ prompt.addEventListener('input',()=> $('count').textContent=prompt.value.length);
+ $('clearPrompt').addEventListener('click',()=>{prompt.value='';$('count').textContent='0';});
+ document.querySelectorAll('.chip').forEach(btn=>btn.addEventListener('click',()=>{
+   document.querySelectorAll('.chip').forEach(b=>b.classList.remove('active')); btn.classList.add('active');
+   prompt.value=btn.dataset.prompt; $('count').textContent=prompt.value.length;
+ }));
+ document.querySelectorAll('.mode-btn').forEach(btn=>btn.addEventListener('click',()=>{
+   mode=btn.dataset.mode; document.querySelectorAll('.mode-btn').forEach(b=>b.classList.toggle('active',b===btn));
+   setMessage(mode==='edit'?'Edit mode selected. Add a reference photo and describe the changes you want.':'Generate mode selected. Describe a new image in your prompt.','info');
+ }));
+ function acceptFile(file){
+   if(!file) return;
+   if(!['image/jpeg','image/png','image/webp'].includes(file.type)){setMessage('Please choose a JPG, PNG or WEBP image.','error');return;}
+   if(file.size>12*1024*1024){setMessage('That image is larger than 12 MB. Choose a smaller file.','error');return;}
+   selectedFile=file; $('fileName').textContent=file.name; clearMessage();
+   const localUrl=URL.createObjectURL(file); showImage(localUrl);
+   if(mode==='generate'){mode='edit';document.querySelector('[data-mode="edit"]').click();}
+ }
+ fileInput.addEventListener('change',e=>acceptFile(e.target.files[0]));
+ const drop=$('dropZone');
+ ['dragenter','dragover'].forEach(evt=>drop.addEventListener(evt,e=>{e.preventDefault();drop.classList.add('drag');}));
+ ['dragleave','drop'].forEach(evt=>drop.addEventListener(evt,e=>{e.preventDefault();drop.classList.remove('drag');}));
+ drop.addEventListener('drop',e=>acceptFile(e.dataTransfer.files[0]));
+ $('generateBtn').addEventListener('click', async()=>{
+   const text=prompt.value.trim();
+   if(!text){setMessage('Add a prompt before generating your image.','error');prompt.focus();return;}
+   if(mode==='edit'&&!selectedFile){setMessage('Upload a reference photo to use Edit photo mode.','error');return;}
+   const btn=$('generateBtn'); btn.disabled=true; btn.textContent='Preparing your creation…'; clearMessage();
+   try{
+     const form=new FormData();
+     form.append('prompt',text); form.append('mode',mode); form.append('aspect_ratio',$('ratio').value);
+     form.append('quality',$('quality').value); form.append('style_strength',$('style').value);
+     if(selectedFile) form.append('image',selectedFile);
+     // Configure your server to accept POST /api/generate and return { image_url: "https://..." }
+     const response=await fetch('/api/generate',{method:'POST',body:form});
+     if(!response.ok) throw new Error(response.status===404?'The AI backend is not connected yet. Add your server endpoint at /api/generate.':'The image service could not complete this request. Check your backend and try again.');
+     const data=await response.json();
+     if(data.image_url){resultUrl=data.image_url;showImage(resultUrl);}
+     else if(data.image_base64){resultUrl='data:'+(data.mime_type||'image/png')+';base64,'+data.image_base64;showImage(resultUrl);}
+     else throw new Error('The backend response did not include image_url or image_base64.');
+     setMessage('Your image is ready.','success');
+   }catch(err){
+     setMessage(err.message.includes('Failed to fetch')?'Cannot reach /api/generate. Run this page with your configured backend server.':err.message,'error');
+   }finally{btn.disabled=false;btn.textContent='✦  Generate image';}
+ });
+ $('downloadBtn').addEventListener('click',async()=>{
+   if(!resultImage.src)return;
+   try{
+     const response=await fetch(resultImage.src); const blob=await response.blob(); const url=URL.createObjectURL(blob);
+     const a=document.createElement('a');a.href=url;a.download='nz-ai-studio-creation.png';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+   }catch(e){const a=document.createElement('a');a.href=resultImage.src;a.download='nz-ai-studio-creation';a.target='_blank';a.click();}
+ });
+ $('resetBtn').addEventListener('click',()=>{
+   prompt.value='';$('count').textContent='0';fileInput.value='';selectedFile=null;$('fileName').textContent='';
+   document.querySelectorAll('.chip').forEach(b=>b.classList.remove('active'));
+   $('ratio').value='1:1';$('quality').value='standard';$('style').value='balanced';
+   mode='generate';document.querySelectorAll('.mode-btn').forEach(b=>b.classList.toggle('active',b.dataset.mode==='generate'));
+   resetResult();clearMessage();
+ });
+})();
+</script>
+</body>
+</html>
